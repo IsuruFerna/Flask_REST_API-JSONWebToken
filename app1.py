@@ -39,9 +39,10 @@ def login():
   auth = request.authorization
 
   if auth and auth.password == 'password':
-    token = jwt.encode({'user': auth.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'])
+    token = jwt.encode({'user': auth.username, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=300)}, app.config['SECRET_KEY'])
+    # datetime.datetime.utcnow() + datetime.timedelta(minutes=300)
 
-    return jsonify({'token' : token}) #python 3 or above
+    return jsonify({'token' : token}) #python 3 or
     # return jsonify({'token' : token.decode('UTF-8')})
 
   return make_response('Could not Varify!', 401, {'WWW-Authenticate' : 'Basic realm="Login Required"'})
